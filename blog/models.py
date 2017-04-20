@@ -10,7 +10,7 @@ class PublishedManager(models.Manager):
 		def get_queryset(self):
 			return super(PublishedManager,
 					 self).get_queryset()\
-						  .filter(Status='published')
+						  .filter(Status='published')#PublishedManager blog/models.py:9
 
 class Post(models.Model):
 	STATUS_CHOICES=(

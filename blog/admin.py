@@ -7,3 +7,4 @@ from .models import Post
 class PostAdmin(admin.ModelAdmin):
 	list_display = ('title', 'slug', 'author', 'publish','Status')
 admin.site.register(Post, PostAdmin)
+	#blog/models.py:15,blog/admin.py:7
