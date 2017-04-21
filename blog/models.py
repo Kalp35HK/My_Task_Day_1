@@ -6,6 +6,7 @@ from django.db import models
 from django.utils import timezone
 from django.core.urlresolvers import reverse
 
+
 class PublishedManager(models.Manager):
 		def get_queryset(self):
 			return super(PublishedManager,
@@ -17,6 +18,8 @@ class Post(models.Model):
 		('draft','Draft'),
 		('published','Published')
 		)
+
+	published = PublishedManager()
 
 	#Post title
 	title=models.CharField(max_length=250);
@@ -54,12 +57,27 @@ class Post(models.Model):
 
 	
 
-	published = PublishedManager()
 	
 		
 
 	def __str__(self):
 		return self.title
+
+class  comment(models.Model):
+		post = models.ForeignKey(Post,related_name='comments')
+		name=models.CharField(max_length=80)
+		email=models.EmailField()
+		body=models.TextField()
+		created=models.DateTimeField(auto_now_add=True)
+		updated=models.DateTimeField(auto_now=True)
+		active=models.BooleanField(default=True)
+
+		class Meta:
+			ordering =('created',)
+		def __str__(self):
+			return 'comment by {} on {}'.format(self.name,self.post)
+
+
 
 
 
